@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORDER HISTORY</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .card p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .total-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #888;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #2f3640;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Order History</h1>
+
+        {% if my_order %}
+            {% for order in my_order %}
+                <div class="card">
+                    <h3>{{ order.product.product_name }}</h3>
+                    <p>Qty: {{ order.qty }}</p>
+                    <p>Price per item: ₹{{ order.product.price }}</p>
+                    <p>Total: ₹{{ order.product.price * order.qty }}</p>
+                </div>
+                <hr>
+            {% endfor %}
+
+            <div class="total-box">
+                <h2>Total Spent: ₹{{ price }}</h2>
+            </div>
+
+        {% else %}
+            <p class="empty">No past orders 📭</p>
+        {% endif %}
+
+        <a class="back-link" href="/product/view">⬅ Back</a>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCTS</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #2f3640;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            text-decoration: none;
+            color: #2f3640;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background-color: #2f3640;
+            color: white;
+        }
+
+        .message {
+            margin-top: 15px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>WELCOME TO E-COMMERCE APP</h1>
+    </div>
+
+    <div class="container">
+
+        {% if user.role == "seller" %}
+        <a href="product/add_product">ADD PRODUCT</a>
+        <a href="product/view-myproduct">MY PRODUCTS</a>
+        {% endif %}
+
+        <a href="product/view-history">PAYMENT HISTORY</a>
+        <a href="product/view-myorder">MY CART</a>
+        <a href="product/view">VIEW PRODUCTS</a>
+        <a href="auth/logout">LOG OUT</a>
+
+        <p class="message">{{message}}</p>
+
+    </div>
+
+</body>
+</html>

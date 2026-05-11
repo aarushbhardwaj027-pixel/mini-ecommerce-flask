@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #2f3640;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h3 {
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #44bd32;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cd137;
+        }
+
+        .back-btn {
+            margin-top: 10px;
+            background-color: #2f3640;
+        }
+
+        .back-btn:hover {
+            background-color: #353b48;
+        }
+
+        .center-text {
+            text-align: center;
+            color: #e84118;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Add Product</h1>
+    </div>
+
+    {% if user1.role == "seller" %}
+    <div class="container">
+        <form method="POST">
+            <h3>Enter product name</h3>
+            <input type="text" name="product_name" placeholder="Enter product name" required>
+
+            <h3>Enter product description</h3>
+            <input type="text" name="product_description" placeholder="Enter product description" required>
+
+            <h3>Enter product price</h3>
+            <input type="number" name="price" placeholder="Enter product price" required>
+
+            <h3>Enter product quantity</h3>
+            <input type="number" name="quantity" placeholder="Enter product quantity" required>
+
+            <button type="submit">SUBMIT</button>
+        </form>
+
+        <form action="/product">
+            <button class="back-btn">BACK</button>
+        </form>
+    </div>
+
+    {% elif user1.role == "buyer"%}
+
+    <h3 class="center-text">BUYER CAN'T ADD PRODUCTS</h3>
+
+    {% endif %}
+
+</body>
+</html>

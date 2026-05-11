@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY ORDERS</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .order-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #e84118;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #c23616;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #44bd32;
+        }
+
+        .pay-btn:hover {
+            background-color: #4cd137;
+        }
+
+        .billing {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #2f3640;
+        }
+
+        .divider {
+            text-align: center;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>My Orders</h1>
+
+        <div>
+            {% if my_order%}
+                {% for order in my_order %}
+                <div class="order-card">
+                    <h3>{{order.product.product_name}}</h3>
+                    <form method="POST" action="/product/cancel/{{order.id}}">
+                        <button type="submit">CANCEL</button>
+                    </form>
+                </div>
+                {% endfor %}
+            {% else%}
+            <p style="text-align:center;">NO ORDERS YET</p>
+            {% endif %}
+        </div>
+
+        <br><br>
+
+        <h1>BILLING COUNTER</h1>
+
+        <div class="billing">
+            {% for order in my_order %}
+                <h3>PRODUCT - {{order.product.product_name}} | QUANTITY - {{order.qty}} | PRICE PER ITEM - ₹{{order.product.price}} | TOTAL PRICE OF PRODUCTS - ₹{{ order.product.price * order.qty }}</h3>
+            {% endfor %}
+
+
+            <h2>TOTAL PRICE : ₹{{price}}</h2>
+
+            <form method="POST" action="/product/pay">
+                <button class="pay-btn" type="submit">PAY ₹{{price}}</button>
+            </form>
+        </div>
+
+        <br><br>
+
+        <a class="back-link" href="/product">⬅ BACK</a>
+
+    </div>
+
+</body>
+</html>
